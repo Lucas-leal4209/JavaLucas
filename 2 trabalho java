@@ -1,0 +1,76 @@
+//feito e executável no eclipse
+
+package calcularArea; // arquivo CalcularArea.java
+
+public interface AreaCalculavel {
+    double calculaArea();
+}
+
+
+	package calcularArea; // arquivo Quadrado.java
+
+	public class Quadrado implements AreaCalculavel {
+	    private double lado;
+
+	    public Quadrado(double lado) {
+	        this.lado = lado;
+	    }
+
+	    @Override
+	    public double calculaArea() {
+	        return lado * lado;
+	    }
+	}
+
+
+package calcularArea; // arquivo Retangulo.java
+
+public class Retangulo implements AreaCalculavel {
+    private double base;
+    private double altura;
+
+    public Retangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+
+    @Override
+    public double calculaArea() {
+        return base * altura;
+    }
+}
+
+package calcularArea; // arquivo Circulo.java
+
+public class Circulo implements AreaCalculavel {
+    private double raio;
+    private final double PI = 3.14159;
+
+    public Circulo(double raio) {
+        this.raio = raio;
+    }
+
+    @Override
+    public double calculaArea() {
+        return PI * raio * raio;
+    }
+}
+
+
+package calcularArea; // arquivo Teste.java
+
+public class Teste {
+    public static void main(String[] args) {
+        AreaCalculavel[] areas = new AreaCalculavel[6];
+        areas[0] = new Quadrado(5.0);
+        areas[1] = new Quadrado(3.0);
+        areas[2] = new Retangulo(4.0, 6.0);
+        areas[3] = new Retangulo(2.0, 8.0);
+        areas[4] = new Circulo(2.5);
+        areas[5] = new Circulo(3.7);
+
+        for (AreaCalculavel area : areas) {
+            System.out.println("Área: " + area.calculaArea());
+        }
+    }
+}
