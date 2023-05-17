@@ -1,0 +1,65 @@
+public class Main { // arquivo Main.java
+    public static void main(String[] args) {
+        // cria objeto pessoa
+        Pessoa pessoa = new Pessoa("Pedro", 27, 8200.0);
+
+        // imprime as informações sem alteração
+        System.out.println("Informações da Pessoa:");
+        System.out.println("Nome: " + pessoa.getNome());
+        System.out.println("Idade: " + pessoa.getIdade());
+        System.out.println("Salário: " + pessoa.getSalario());
+
+        // calcula salário anual
+        double salarioAnual = pessoa.calcularSalarioAnual();
+        System.out.println("Salário Anual: " + salarioAnual);
+
+        // reajusta
+        pessoa.aplicarReajuste();
+        System.out.println("Novo Salário após Reajuste: " + pessoa.getSalario());
+    }
+}
+
+
+public class Pessoa { // arquivo Pessoa.java
+    private String nome;
+    private int idade;
+    private double salario;
+
+    public Pessoa(String nome, int idade, double salario) {
+        this.nome = nome;
+        this.idade = idade;
+        this.salario = salario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public double calcularSalarioAnual() {
+        return salario * 12;
+    }
+
+    public void aplicarReajuste() {
+        salario += salario * 0.15;
+    }
+}
