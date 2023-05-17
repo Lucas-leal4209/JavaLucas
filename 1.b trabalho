@@ -1,0 +1,75 @@
+interface Tributavel {
+    double calcularTributos();
+}
+
+class ContaCorrente implements Tributavel {
+    private double saldo;
+
+    public ContaCorrente(double saldo) {
+        this.saldo = saldo;
+    }
+
+    @Override
+    public double calcularTributos() {
+        return saldo * 0.1; // Exemplo de cálculo de tributos para ContaCorrente
+    }
+}
+
+class SeguroDeVida implements Tributavel {
+    private double valorSeguro;
+
+    public SeguroDeVida(double valorSeguro) {
+        this.valorSeguro = valorSeguro;
+    }
+
+    @Override
+    public double calcularTributos() {
+        return valorSeguro * 0.05; // Exemplo de cálculo de tributos para SeguroDeVida
+    }
+}
+
+class Imovel implements Tributavel {
+    private double valorImovel;
+
+    public Imovel(double valorImovel) {
+        this.valorImovel = valorImovel;
+    }
+
+    @Override
+    public double calcularTributos() {
+        return valorImovel * 0.02; // Exemplo de cálculo de tributos para Imovel
+    }
+}
+
+public class GerenciadorDeImpostoDeRenda {
+    private double totalTributos;
+
+    public void adicionar(Tributavel tributavel) {
+        double tributos = tributavel.calcularTributos();
+        totalTributos += tributos;
+    }
+
+    public double getTotalTributos() {
+        return totalTributos;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        GerenciadorDeImpostoDeRenda gerenciador = new GerenciadorDeImpostoDeRenda();
+
+        // Instanciando e adicionando diferentes objetos Tributavel
+        ContaCorrente contaCorrente = new ContaCorrente(1000);
+        gerenciador.adicionar(contaCorrente);
+
+        SeguroDeVida seguroVida = new SeguroDeVida(500);
+        gerenciador.adicionar(seguroVida);
+
+        Imovel imovel = new Imovel(2000);
+        gerenciador.adicionar(imovel);
+
+        // Obtendo o total de tributos
+        double totalTributos = gerenciador.getTotalTributos();
+        System.out.println("Total de tributos: " + totalTributos);
+    }
+}
