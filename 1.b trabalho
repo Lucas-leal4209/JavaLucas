@@ -1,29 +1,63 @@
-public class GerenciadorDeImpostoDeRenda {
-    private double totalTributos;
+import java.util.ArrayList;
+import java.util.List;
+
+interface Tributavel {
+    double calcularImposto();
+}
+
+class ContaCorrente implements Tributavel {
+    private double saldo;
+
+    public ContaCorrente(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public double calcularImposto() {
+        return saldo * 0.1; // Exemplo de cálculo de imposto para conta corrente
+    }
+}
+
+class SeguroDeVida implements Tributavel {
+    private double valorSegurado;
+
+    public SeguroDeVida(double valorSegurado) {
+        this.valorSegurado = valorSegurado;
+    }
+
+    public double calcularImposto() {
+        return valorSegurado * 0.05; // Exemplo de cálculo de imposto para seguro de vida
+    }
+}
+
+class GerenciadorDeImpostoDeRenda {
+    private double totalImpostos;
+    private List<Tributavel> tributaveis;
+
+    public GerenciadorDeImpostoDeRenda() {
+        totalImpostos = 0;
+        tributaveis = new ArrayList<>();
+    }
 
     public void adicionar(Tributavel tributavel) {
-        double tributos = tributavel.calcularTributos();
-        totalTributos += tributos;
+        tributaveis.add(tributavel);
+        totalImpostos += tributavel.calcularImposto();
     }
 
-    public double getTotalTributos() {
-        return totalTributos;
+    public double getTotalImpostos() {
+        return totalImpostos;
     }
+}
 
+public class Main {
     public static void main(String[] args) {
-        // Criando instâncias de classes que implementam Tributavel
-        ContaCorrente contaCorrente = new ContaCorrente(1000);
-        SeguroDeVida seguroDeVida = new SeguroDeVida(50000);
-
-        // Criando uma instância de GerenciadorDeImpostoDeRenda
         GerenciadorDeImpostoDeRenda gerenciador = new GerenciadorDeImpostoDeRenda();
 
-        // Adicionando as contas ao gerenciador
-        gerenciador.adicionar(contaCorrente);
-        gerenciador.adicionar(seguroDeVida);
+        ContaCorrente conta1 = new ContaCorrente(2500);
+        SeguroDeVida seguro1 = new SeguroDeVida(85000);
 
-        // Obtendo o total de tributos
-        double totalTributos = gerenciador.getTotalTributos();
-        System.out.println("Total de Tributos: " + totalTributos);
+        gerenciador.adicionar(conta1);
+        gerenciador.adicionar(seguro1);
+
+        System.out.println("Total de impostos: " + gerenciador.getTotalImpostos());
     }
 }
