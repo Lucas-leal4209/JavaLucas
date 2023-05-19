@@ -1,13 +1,7 @@
-// Questão 3
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("inicio do main");
-        try {
-            metodo1();
-        } catch (Exception e) {
-            System.out.println("Ocorreu uma exceção: " + e.getMessage());
-        }
+        metodo1();
         System.out.println("fim do main");
     }
 
@@ -15,7 +9,7 @@ public class Main {
         System.out.println("inicio do metodo1");
         try {
             metodo2();
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Ocorreu uma exceção: " + e.getMessage());
         }
         System.out.println("fim do metodo1");
@@ -23,14 +17,14 @@ public class Main {
 
     static void metodo2() {
         System.out.println("inicio do metodo2");
-        int[] array = new int[10];
+        int[] array = new int[16];
         try {
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i <= 15; i++) {
                 array[i] = i;
                 System.out.println(i);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Ocorreu uma exceção: Índice fora dos limites do array.");
+            System.out.println("Ocorreu uma exceção: " + e.getMessage());
         }
         System.out.println("fim do metodo2");
     }
